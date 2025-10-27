@@ -1,0 +1,32 @@
+[
+    {
+      "id": 1,
+      "id_proyecto": 1,
+      "fecha_evalu": "2024-01-10",
+      "id_resposanble": 1,
+      "observaciones": "Proyecto viable con alto impacto social",
+      "estatus": "Aprobado",
+      "estatus_resp": "Completado",
+      "viabilidad": "Alta"
+    },
+    {
+      "id": 2,
+      "id_proyecto": 2,
+      "fecha_evalu": "2024-01-20",
+      "id_resposanble": 2,
+      "observaciones": "Requiere ajustes en el presupuesto",
+      "estatus": "Pendiente",
+      "estatus_resp": "En revisión",
+      "viabilidad": "Media"
+    },
+    {
+      "id": 3,
+      "id_proyecto": 3,
+      "fecha_evalu": "2024-02-05",
+      "id_resposanble": 1,
+      "observaciones": "No cumple con todos los requisitos",
+      "estatus": "Rechazado",
+      "estatus_resp": "Completado",
+      "viabilidad": "Baja"
+    }
+  ]

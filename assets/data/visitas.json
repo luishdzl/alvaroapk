@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "id_parroquia": 1,
+      "id_comunidad": 1,
+      "visita": "Visita de Inspección Inicial",
+      "descripcion_vis": "Evaluación inicial del terreno para el proyecto de infraestructura"
+    },
+    {
+      "id": 2,
+      "id_parroquia": 1,
+      "id_comunidad": 2,
+      "visita": "Seguimiento de Avances",
+      "descripcion_vis": "Revisión del progreso en las construcciones comunitarias"
+    },
+    {
+      "id": 3,
+      "id_parroquia": 2,
+      "id_comunidad": 3,
+      "visita": "Evaluación Final",
+      "descripcion_vis": "Verificación de la culminación del proyecto social"
+    }
+  ]

@@ -1,0 +1,16 @@
+[
+    {
+      "id": 1,
+      "cedula": "12345678",
+      "nombre": "María",
+      "apellido": "González",
+      "fecha_nacimiento": "1985-05-15",
+      "edad": 38,
+      "genero": "Femenino",
+      "telefono": "0412-1234567",
+      "correo": "maria@comunidad.com",
+      "direccion": "Calle Principal #123",
+      "id_cargo": 1,
+      "tipo_vocero": "Principal"
+    }
+  ]

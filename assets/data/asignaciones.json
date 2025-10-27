@@ -1,0 +1,38 @@
+[
+    {
+      "id": 1,
+      "id_evaluacion": 1,
+      "id_vocero": 1,
+      "id_comunidad": 1,
+      "id_ayuda": 1,
+      "descri_alcance": "Construcción de centro comunitario",
+      "moneda_presu": "USD",
+      "presupuesto": 50000.0,
+      "impacto_ambiental": "Bajo",
+      "impacto_social": "Alto",
+      "imagenes": "centro_comunitario.jpg",
+      "latitud": 10.123456,
+      "longtud": -67.654321,
+      "direccion": "Calle Principal, Sector Centro",
+      "fecha_inicio": "2024-01-15",
+      "duracion_estimada": "6 meses"
+    },
+    {
+      "id": 2,
+      "id_evaluacion": 2,
+      "id_vocero": 2,
+      "id_comunidad": 2,
+      "id_ayuda": 2,
+      "descri_alcance": "Programa de capacitación técnica",
+      "moneda_presu": "USD",
+      "presupuesto": 15000.0,
+      "impacto_ambiental": "Nulo",
+      "impacto_social": "Muy Alto",
+      "imagenes": "capacitacion.jpg",
+      "latitud": 10.234567,
+      "longtud": -67.543210,
+      "direccion": "Avenida Bolívar, Urbanización Nueva",
+      "fecha_inicio": "2024-02-01",
+      "duracion_estimada": "3 meses"
+    }
+  ]

@@ -1,0 +1,14 @@
+[
+    {
+      "id": 1,
+      "nombre_pro": "Mejora de Infraestructura Comunitaria",
+      "descripcion_pro": "Proyecto de renovación de espacios públicos",
+      "tipo_pro": "Infraestructura",
+      "id_ayuda": 1,
+      "actividades": "Construcción, pintura, instalaciones",
+      "fecha_inicial": "2024-01-15",
+      "fecha_final": "2024-06-30",
+      "prioridad": "Alta",
+      "acta_conformidad": "AC-2024-001"
+    }
+  ]
