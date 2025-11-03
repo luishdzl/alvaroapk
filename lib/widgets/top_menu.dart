@@ -24,7 +24,7 @@ class TopMenu extends StatelessWidget implements PreferredSizeWidget {
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Text(
-            'Sistema Comunitario',
+            'SIGISSAF',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -60,7 +60,7 @@ class TopMenu extends StatelessWidget implements PreferredSizeWidget {
       _buildMenuButton('Proyectos', '/proyectos', Icons.assignment),
       _buildMenuButton('Visitas', '/visitas', Icons.visibility),
       _buildMenuButton('Voceros', '/voceros', Icons.people),
-      _buildMenuButton('Asignaciones', '/asignaciones', Icons.assignment_turned_in),
+      _buildMenuButton('Planificacion', '/planificacion', Icons.assignment_turned_in),
       _buildMenuButton('Evaluaciones', '/evaluaciones', Icons.assessment),
     ];
   }
@@ -74,7 +74,7 @@ class TopMenu extends StatelessWidget implements PreferredSizeWidget {
         PopupMenuItem(value: '/proyectos', child: ListTile(leading: Icon(Icons.assignment), title: Text('Proyectos'))),
         PopupMenuItem(value: '/visitas', child: ListTile(leading: Icon(Icons.visibility), title: Text('Visitas'))),
         PopupMenuItem(value: '/voceros', child: ListTile(leading: Icon(Icons.people), title: Text('Voceros'))),
-        PopupMenuItem(value: '/asignaciones', child: ListTile(leading: Icon(Icons.assignment_turned_in), title: Text('Asignaciones'))),
+        PopupMenuItem(value: '/planificacion', child: ListTile(leading: Icon(Icons.assignment_turned_in), title: Text('Planificacion'))),
         PopupMenuItem(value: '/evaluaciones', child: ListTile(leading: Icon(Icons.assessment), title: Text('Evaluaciones'))),
       ],
     );

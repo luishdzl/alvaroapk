@@ -4,7 +4,7 @@ import '../models/proyecto.dart';
 import '../models/visita.dart';
 import '../models/vocero.dart';
 import '../models/user.dart';
-import '../models/asignacion.dart';
+import '../models/planificacion.dart';
 import '../models/evaluacion.dart';
 import '../models/seguimiento.dart';
 
@@ -33,10 +33,10 @@ class DataService {
     return (data as List).map((json) => User.fromJson(json)).toList();
   }
 
-  static Future<List<Asignacion>> loadAsignaciones() async {
-    final String response = await rootBundle.loadString('assets/data/asignaciones.json');
+  static Future<List<Planificacion>> loadPlanificacion() async {
+    final String response = await rootBundle.loadString('assets/data/planificacion.json');
     final data = await json.decode(response);
-    return (data as List).map((json) => Asignacion.fromJson(json)).toList();
+    return (data as List).map((json) => Planificacion.fromJson(json)).toList();
   }
 
   static Future<List<Evaluacion>> loadEvaluaciones() async {

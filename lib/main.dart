@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'auth_service.dart'; // Asegúrate de importar el servicio
 import 'screens/login_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/proyectos_screen.dart';
 import 'screens/visitas_screen.dart';
 import 'screens/voceros_screen.dart';
-import 'screens/asignaciones_screen.dart';
+import 'screens/planificacion_screen.dart';
 import 'screens/evaluaciones_screen.dart';
 import 'widgets/top_menu.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sistema Comunitario',
+      title: 'SIGISSAF',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -35,21 +36,48 @@ class AuthWrapper extends StatefulWidget {
 
 class _AuthWrapperState extends State<AuthWrapper> {
   bool _isLoggedIn = false;
+  bool _isLoading = true;
 
-  void _handleLoginResult(bool success) {
+  @override
+  void initState() {
+    super.initState();
+    _checkLoginStatus();
+  }
+
+  void _checkLoginStatus() async {
+    final isLoggedIn = await AuthService.isLoggedIn();
+    setState(() {
+      _isLoggedIn = isLoggedIn;
+      _isLoading = false;
+    });
+  }
+
+  void _handleLoginResult(bool success) async {
+    if (success) {
+      await AuthService.setLoggedIn(true);
+    }
     setState(() {
       _isLoggedIn = success;
     });
   }
 
-  void _logout() {
-    setState(() {
-      _isLoggedIn = false;
-    });
-  }
+void _logout() async {
+  await AuthService.logout(); // Limpiar la sesión
+  setState(() {
+    _isLoggedIn = false;
+  });
+} 
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    
     return _isLoggedIn ? MainNavigation(onLogout: _logout) : LoginScreen(onLoginResult: _handleLoginResult);
   }
 }
@@ -83,8 +111,8 @@ class _MainNavigationState extends State<MainNavigation> {
         return VisitasScreen();
       case '/voceros':
         return VocerosScreen();
-      case '/asignaciones':
-        return AsignacionesScreen();
+      case '/planificacion':
+        return PlanificacionScreen();
       case '/evaluaciones':
         return EvaluacionesScreen();
       default:

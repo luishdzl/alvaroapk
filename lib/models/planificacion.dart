@@ -1,4 +1,4 @@
-class Asignacion {
+class Planificacion {
   final int id;
   final int idEvaluacion;
   final int idVocero;
@@ -16,7 +16,7 @@ class Asignacion {
   final String fechaInicio;
   final String duracionEstimada;
 
-  Asignacion({
+  Planificacion({
     required this.id,
     required this.idEvaluacion,
     required this.idVocero,
@@ -35,8 +35,8 @@ class Asignacion {
     required this.duracionEstimada,
   });
 
-  factory Asignacion.fromJson(Map<String, dynamic> json) {
-    return Asignacion(
+  factory Planificacion.fromJson(Map<String, dynamic> json) {
+    return Planificacion(
       id: json['id'],
       idEvaluacion: json['id_evaluacion'],
       idVocero: json['id_vocero'],

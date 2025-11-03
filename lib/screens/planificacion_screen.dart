@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import '../models/asignacion.dart';
+import '../models/planificacion.dart';
 import '../services/data_service.dart';
 import '../widgets/search_widget.dart';
-import './asignacion_detail_screen.dart';
+import './planificacion_detail_screen.dart';
 
-class AsignacionesScreen extends StatefulWidget {
+class PlanificacionScreen extends StatefulWidget {
   @override
-  _AsignacionesScreenState createState() => _AsignacionesScreenState();
+  _PlanificacionScreenState createState() => _PlanificacionScreenState();
 }
 
-class _AsignacionesScreenState extends State<AsignacionesScreen> {
-  late Future<List<Asignacion>> futureAsignaciones;
-  List<Asignacion> _allAsignaciones = [];
-  List<Asignacion> _filteredAsignaciones = [];
+class _PlanificacionScreenState extends State<PlanificacionScreen> {
+  late Future<List<Planificacion>> futurePlanificacion;
+  List<Planificacion> _allPlanificacion = [];
+  List<Planificacion> _filteredPlanificacion = [];
   String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
-    futureAsignaciones = DataService.loadAsignaciones().then((asignaciones) {
+    futurePlanificacion = DataService.loadPlanificacion().then((planificacion) {
       setState(() {
-        _allAsignaciones = asignaciones;
-        _filteredAsignaciones = asignaciones;
+        _allPlanificacion = planificacion;
+        _filteredPlanificacion = planificacion;
       });
-      return asignaciones;
+      return planificacion;
     });
   }
 
@@ -31,15 +31,15 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
     setState(() {
       _searchQuery = query.toLowerCase();
       if (query.isEmpty) {
-        _filteredAsignaciones = _allAsignaciones;
+        _filteredPlanificacion = _allPlanificacion;
       } else {
-        _filteredAsignaciones = _allAsignaciones.where((asignacion) {
-          return asignacion.descriAlcance.toLowerCase().contains(_searchQuery) ||
-                 asignacion.direccion.toLowerCase().contains(_searchQuery) ||
-                 asignacion.monedaPresu.toLowerCase().contains(_searchQuery) ||
-                 asignacion.duracionEstimada.toLowerCase().contains(_searchQuery) ||
-                 asignacion.presupuesto.toString().contains(_searchQuery) ||
-                 asignacion.id.toString().contains(_searchQuery);
+        _filteredPlanificacion = _allPlanificacion.where((planificacion) {
+          return planificacion.descriAlcance.toLowerCase().contains(_searchQuery) ||
+                 planificacion.direccion.toLowerCase().contains(_searchQuery) ||
+                 planificacion.monedaPresu.toLowerCase().contains(_searchQuery) ||
+                 planificacion.duracionEstimada.toLowerCase().contains(_searchQuery) ||
+                 planificacion.presupuesto.toString().contains(_searchQuery) ||
+                 planificacion.id.toString().contains(_searchQuery);
         }).toList();
       }
     });
@@ -47,15 +47,15 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
 
   void _onSearchCleared() {
     setState(() {
-      _filteredAsignaciones = _allAsignaciones;
+      _filteredPlanificacion = _allPlanificacion;
     });
   }
 
-  void _navigateToDetail(Asignacion asignacion) {
+  void _navigateToDetail(Planificacion planificacion) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AsignacionDetailScreen(asignacion: asignacion),
+        builder: (context) => PlanificacionDetailScreen(planificacion: planificacion),
       ),
     );
   }
@@ -64,14 +64,14 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Asignaciones'),
+        title: Text('Planificacion'),
         backgroundColor: Colors.purple[700],
       ),
       body: Column(
         children: [
           // Buscador
           SearchWidget(
-            hintText: 'Buscar asignaciones...',
+            hintText: 'Buscar planificacion...',
             onSearchChanged: _onSearchChanged,
             onSearchCleared: _onSearchCleared,
           ),
@@ -83,7 +83,7 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${_filteredAsignaciones.length} asignaciones encontradas',
+                  '${_filteredPlanificacion.length} planificacion encontradas',
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 14,
@@ -103,24 +103,24 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
           
           SizedBox(height: 8),
           
-          // Lista de asignaciones
+          // Lista de planificacion
           Expanded(
-            child: FutureBuilder<List<Asignacion>>(
-              future: futureAsignaciones,
+            child: FutureBuilder<List<Planificacion>>(
+              future: futurePlanificacion,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || _filteredAsignaciones.isEmpty) {
+                } else if (!snapshot.hasData || _filteredPlanificacion.isEmpty) {
                   return _buildEmptyState();
                 }
 
                 return ListView.builder(
-                  itemCount: _filteredAsignaciones.length,
+                  itemCount: _filteredPlanificacion.length,
                   itemBuilder: (context, index) {
-                    Asignacion asignacion = _filteredAsignaciones[index];
-                    return _buildAsignacionCard(asignacion);
+                    Planificacion planificacion = _filteredPlanificacion[index];
+                    return _buildPlanificacionCard(planificacion);
                   },
                 );
               },
@@ -131,7 +131,7 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
     );
   }
 
-  Widget _buildAsignacionCard(Asignacion asignacion) {
+  Widget _buildPlanificacionCard(Planificacion planificacion) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       elevation: 3,
@@ -148,7 +148,7 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
           child: Icon(Icons.assignment_turned_in, color: Colors.purple[700]),
         ),
         title: Text(
-          'Asignación #${asignacion.id}',
+          'Asignación #${planificacion.id}',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         subtitle: Column(
@@ -156,7 +156,7 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
           children: [
             SizedBox(height: 8),
             Text(
-              asignacion.descriAlcance,
+              planificacion.descriAlcance,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(color: Colors.grey[700]),
@@ -164,14 +164,14 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
             SizedBox(height: 8),
             Row(
               children: [
-                _buildInfoChip('${asignacion.monedaPresu} ${asignacion.presupuesto.toStringAsFixed(0)}', Icons.attach_money),
+                _buildInfoChip('${planificacion.monedaPresu} ${planificacion.presupuesto.toStringAsFixed(0)}', Icons.attach_money),
                 SizedBox(width: 8),
-                _buildInfoChip(asignacion.duracionEstimada, Icons.schedule),
+                _buildInfoChip(planificacion.duracionEstimada, Icons.schedule),
               ],
             ),
             SizedBox(height: 4),
             Text(
-              asignacion.direccion,
+              planificacion.direccion,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -186,7 +186,7 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
           ),
           child: Icon(Icons.arrow_forward_ios, size: 16, color: Colors.purple[700]),
         ),
-        onTap: () => _navigateToDetail(asignacion),
+        onTap: () => _navigateToDetail(planificacion),
       ),
     );
   }
@@ -220,7 +220,7 @@ class _AsignacionesScreenState extends State<AsignacionesScreen> {
           Icon(Icons.search_off, size: 80, color: Colors.grey[400]),
           SizedBox(height: 16),
           Text(
-            _searchQuery.isEmpty ? 'No hay asignaciones' : 'No se encontraron resultados',
+            _searchQuery.isEmpty ? 'No hay planificacion' : 'No se encontraron resultados',
             style: TextStyle(fontSize: 18, color: Colors.grey[600]),
           ),
           if (_searchQuery.isNotEmpty) ...[

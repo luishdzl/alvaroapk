@@ -57,10 +57,10 @@ class DashboardScreen extends StatelessWidget {
                         route: '/voceros',
                       ),
                       _DashboardItem(
-                        title: 'Asignaciones',
+                        title: 'Planificacion',
                         icon: Icons.assignment_turned_in,
                         color: Colors.purple,
-                        route: '/asignaciones',
+                        route: '/planificacion',
                       ),
                       _DashboardItem(
                         title: 'Evaluaciones',
@@ -77,7 +77,7 @@ class DashboardScreen extends StatelessWidget {
                     ];
 
                     final item = items[index];
-                    return _GlassCard(
+                    return _SimpleCard(
                       title: item.title,
                       icon: item.icon,
                       color: item.color,
@@ -113,13 +113,13 @@ class _DashboardItem {
   });
 }
 
-class _GlassCard extends StatelessWidget {
+class _SimpleCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color color;
   final VoidCallback onTap;
 
-  const _GlassCard({
+  const _SimpleCard({
     required this.title,
     required this.icon,
     required this.color,
@@ -135,71 +135,46 @@ class _GlassCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white.withOpacity(0.1),
-            border: Border.all(
-              color: Colors.white.withOpacity(0.3),
-              width: 1,
-            ),
+            color: color,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 20,
-                offset: Offset(0, 10),
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 10,
+                offset: Offset(0, 5),
               ),
             ],
           ),
-          child: Stack(
-            children: [
-              // Efecto de desenfoque
-              BackdropFilter(
-                filter: ColorFilter.mode(
-                  Colors.white.withOpacity(0.2),
-                  BlendMode.dstATop,
-                ),
-                child: Container(),
-              ),
-              // Contenido - CENTRADO
-              Container(
-                width: double.infinity, // Ocupa todo el ancho disponible
-                height: double.infinity, // Ocupa todo el alto disponible
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      color.withOpacity(0.3),
-                      color.withOpacity(0.1),
-                    ],
-                  ),
-                ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: onTap,
+              splashColor: Colors.white.withOpacity(0.3),
+              highlightColor: Colors.white.withOpacity(0.2),
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center, // Centra verticalmente
-                  crossAxisAlignment: CrossAxisAlignment.center, // Centra horizontalmente
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Icono centrado
                     Container(
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.2),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.4),
-                          width: 2,
-                        ),
+                        color: Colors.white.withOpacity(0.9),
                       ),
                       child: Icon(
                         icon,
                         size: 40,
-                        color: Colors.white,
+                        color: color,
                       ),
                     ),
                     SizedBox(height: 16),
-                    // Texto centrado que ocupa todo el ancho disponible
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: SizedBox(
-                        width: double.infinity, // Ocupa todo el ancho disponible
+                        width: double.infinity,
                         child: Text(
                           title,
                           style: TextStyle(
@@ -208,34 +183,22 @@ class _GlassCard extends StatelessWidget {
                             color: Colors.white,
                             shadows: [
                               Shadow(
-                                blurRadius: 5.0,
+                                blurRadius: 3.0,
                                 color: Colors.black45,
                                 offset: Offset(1.0, 1.0),
                               ),
                             ],
                           ),
-                          textAlign: TextAlign.center, // Centra el texto
-                          maxLines: 2, // Permite máximo 2 líneas
-                          overflow: TextOverflow.ellipsis, // Puntos suspensivos si es muy largo
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              // Efecto de brillo al hacer hover/tap
-              Positioned.fill(
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(20),
-                    onTap: onTap,
-                    splashColor: Colors.white.withOpacity(0.2),
-                    highlightColor: Colors.white.withOpacity(0.1),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

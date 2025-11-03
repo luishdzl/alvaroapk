@@ -44,7 +44,7 @@ class VoceroDetailScreen extends StatelessWidget {
                 ],
               ),
 
-              // Información de Contacto
+              // Información de Contacto - MEJORADO PARA MÓVILES
               _buildSectionTitle('Información de Contacto'),
               _buildDetailCard(
                 children: [
@@ -75,14 +75,13 @@ class VoceroDetailScreen extends StatelessWidget {
               SizedBox(height: 20),
               Row(
                 children: [
-                  SizedBox(width: 10),
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back),
-                      label: Text('Volver'),
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      label: Text('Volver', style: TextStyle(fontSize: 16, color: Colors.white)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey[700],
                         padding: EdgeInsets.symmetric(vertical: 15),
@@ -250,45 +249,96 @@ class VoceroDetailScreen extends StatelessWidget {
   Widget _buildContactItem(String label, String value, IconData icon) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              '$label:',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  Icon(icon, size: 16, color: Colors.orange[700]),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      value,
-                      style: TextStyle(
-                        color: Colors.orange[700],
-                        fontWeight: FontWeight.bold,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // Para pantallas pequeñas (menos de 400px de ancho), usar diseño vertical
+          if (constraints.maxWidth < 400) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$label:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[700],
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.orange.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(icon, size: 16, color: Colors.orange[700]),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            color: Colors.orange[700],
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                          // SIN puntos suspensivos - texto completo visible
+                        ),
                       ),
-                      overflow: TextOverflow.ellipsis,
+                    ],
+                  ),
+                ),
+              ],
+            );
+          } else {
+            // Para pantallas más grandes, usar diseño horizontal
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    '$label:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[700],
+                      fontSize: 14,
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-        ],
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(icon, size: 16, color: Colors.orange[700]),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            value,
+                            style: TextStyle(
+                              color: Colors.orange[700],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                            // SIN puntos suspensivos - texto completo visible
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
+        },
       ),
     );
   }

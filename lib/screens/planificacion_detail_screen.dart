@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/asignacion.dart';
+import '../models/planificacion.dart';
 
-class AsignacionDetailScreen extends StatelessWidget {
-  final Asignacion asignacion;
+class PlanificacionDetailScreen extends StatelessWidget {
+  final Planificacion planificacion;
 
-  const AsignacionDetailScreen({Key? key, required this.asignacion}) : super(key: key);
+  const PlanificacionDetailScreen({Key? key, required this.planificacion}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class AsignacionDetailScreen extends StatelessWidget {
               // Header con ID
               _buildDetailCard(
                 children: [
-                  _buildDetailItem('ID Asignación', '#${asignacion.id}'),
+                  _buildDetailItem('ID Asignación', '#${planificacion.id}'),
                   _buildDetailItem('Estado', 'Activa', isStatus: true),
                 ],
               ),
@@ -42,10 +42,10 @@ class AsignacionDetailScreen extends StatelessWidget {
               _buildSectionTitle('Información General'),
               _buildDetailCard(
                 children: [
-                  _buildDetailItem('Descripción', asignacion.descriAlcance),
-                  _buildDetailItem('Dirección', asignacion.direccion),
-                  _buildDetailItem('Fecha Inicio', _formatDate(asignacion.fechaInicio)),
-                  _buildDetailItem('Duración Estimada', asignacion.duracionEstimada),
+                  _buildDetailItem('Descripción', planificacion.descriAlcance),
+                  _buildDetailItem('Dirección', planificacion.direccion),
+                  _buildDetailItem('Fecha Inicio', _formatDate(planificacion.fechaInicio)),
+                  _buildDetailItem('Duración Estimada', planificacion.duracionEstimada),
                 ],
               ),
 
@@ -53,8 +53,8 @@ class AsignacionDetailScreen extends StatelessWidget {
               _buildSectionTitle('Información Financiera'),
               _buildDetailCard(
                 children: [
-                  _buildDetailItem('Presupuesto', '${asignacion.monedaPresu} ${asignacion.presupuesto.toStringAsFixed(2)}'),
-                  _buildDetailItem('Moneda', asignacion.monedaPresu),
+                  _buildDetailItem('Presupuesto', '${planificacion.monedaPresu} ${planificacion.presupuesto.toStringAsFixed(2)}'),
+                  _buildDetailItem('Moneda', planificacion.monedaPresu),
                 ],
               ),
 
@@ -62,8 +62,8 @@ class AsignacionDetailScreen extends StatelessWidget {
               _buildSectionTitle('Evaluación de Impactos'),
               _buildDetailCard(
                 children: [
-                  _buildImpactItem('Impacto Ambiental', asignacion.impactoAmbiental),
-                  _buildImpactItem('Impacto Social', asignacion.impactoSocial),
+                  _buildImpactItem('Impacto Ambiental', planificacion.impactoAmbiental),
+                  _buildImpactItem('Impacto Social', planificacion.impactoSocial),
                 ],
               ),
 
@@ -71,11 +71,11 @@ class AsignacionDetailScreen extends StatelessWidget {
               _buildSectionTitle('Información Técnica'),
               _buildDetailCard(
                 children: [
-                  _buildDetailItem('Evaluación ID', asignacion.idEvaluacion.toString()),
-                  _buildDetailItem('Vocero ID', asignacion.idVocero.toString()),
-                  _buildDetailItem('Comunidad ID', asignacion.idComunidad.toString()),
-                  _buildDetailItem('Ayuda ID', asignacion.idAyuda.toString()),
-                  _buildDetailItem('Coordenadas', '${asignacion.latitud.toStringAsFixed(6)}, ${asignacion.longtud.toStringAsFixed(6)}'),
+                  _buildDetailItem('Evaluación ID', planificacion.idEvaluacion.toString()),
+                  _buildDetailItem('Vocero ID', planificacion.idVocero.toString()),
+                  _buildDetailItem('Comunidad ID', planificacion.idComunidad.toString()),
+                  _buildDetailItem('Ayuda ID', planificacion.idAyuda.toString()),
+                  _buildDetailItem('Coordenadas', '${planificacion.latitud.toStringAsFixed(6)}, ${planificacion.longtud.toStringAsFixed(6)}'),
                 ],
               ),
 
@@ -90,8 +90,8 @@ class AsignacionDetailScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back),
-                      label: Text('Volver'),
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      label: Text('Volver', style: TextStyle(fontSize: 16,color: Colors.white)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey[700],
                         padding: EdgeInsets.symmetric(vertical: 15),

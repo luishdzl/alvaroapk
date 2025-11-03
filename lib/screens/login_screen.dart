@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function(bool) onLoginResult;
@@ -28,7 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
       final password = _passwordController.text.trim();
 
       if (email == 'admin@admin' && password == 'admin') {
-        widget.onLoginResult(true);
+      // Guardar el estado de sesión
+      await AuthService.setLoggedIn(true);
+      widget.onLoginResult(true);
       } else {
         widget.onLoginResult(false);
         _showErrorDialog('Credenciales incorrectas');
@@ -73,20 +76,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.admin_panel_settings, size: 80, color: Colors.blue),
-                    SizedBox(height: 16),
-                    Text(
-                      'Sistema Comunitario',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[700],
-                      ),
-                    ),
+                    Image(
+                    height: 100,
+                    image: AssetImage('assets/logo.png')),
                     SizedBox(height: 8),
                     Text(
                       'Iniciar Sesión',
-                      style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                      style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 9, 94, 221)),
                     ),
                     SizedBox(height: 24),
                     TextFormField(
@@ -136,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 padding: EdgeInsets.symmetric(vertical: 16),
                                 backgroundColor: Colors.blue[700],
                               ),
-                              child: Text('Iniciar Sesión', style: TextStyle(fontSize: 16)),
+                              child: Text('Iniciar Sesión', style: TextStyle(fontSize: 16,color: Colors.white)),
                             ),
                           ),
                     SizedBox(height: 16),

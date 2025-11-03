@@ -106,8 +106,8 @@ class ProyectoDetailScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back),
-                      label: Text('Volver'),
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      label: Text('Volver', style: TextStyle(fontSize: 16,color: Colors.white)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey[700],
                         padding: EdgeInsets.symmetric(vertical: 15),
